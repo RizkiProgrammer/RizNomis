@@ -1,0 +1,6 @@
+{
+  "name": "KosNomis",
+  "description": "Aplikasi manajemen keuangan anak kos cerdas dengan AI Smart Receipt Scanner, Vibe Meter, Mode Akhir Bulan, dan Split-Bill Generator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

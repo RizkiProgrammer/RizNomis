@@ -1,0 +1,136 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Data profil penghuni anak kos.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID unik pengguna (UID Firebase Auth)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Nama panggilan pengguna."
+        },
+        "monthlyAllowance": {
+          "type": "number",
+          "description": "Uang saku bulanan dalam Rp."
+        },
+        "allowanceDay": {
+          "type": "integer",
+          "description": "Tanggal gajian/kiriman uang saku bulanan."
+        },
+        "avatarUrl": {
+          "type": "string",
+          "description": "Tautan gambar foto profil pengguna."
+        },
+        "joinedAt": {
+          "type": "string",
+          "description": "Tanggal akun pertama kali bergabung."
+        }
+      },
+      "required": ["id", "name", "monthlyAllowance", "allowanceDay", "joinedAt"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Catatan pengeluaran harian anak kos.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID unik transaksi pengeluaran."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Pemilik pengeluaran."
+        },
+        "storeName": {
+          "type": "string",
+          "description": "Nama warung / toko / lapak."
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "Total nominal belanja."
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Makanan", "Kos/Utilitas", "Tugas/Kuliah", "Hiburan", "Lainnya"],
+          "description": "Kategori pengeluaran harian."
+        },
+        "items": {
+          "type": "array",
+          "description": "Daftar belanjaan pendukung."
+        },
+        "date": {
+          "type": "string",
+          "description": "Tanggal belanja."
+        },
+        "note": {
+          "type": "string",
+          "description": "Catatan opsional."
+        },
+        "isAiScanned": {
+          "type": "boolean",
+          "description": "Penanda jika di-scan oleh asisten AI."
+        }
+      },
+      "required": ["id", "userId", "storeName", "totalAmount", "category", "items", "date", "isAiScanned"]
+    },
+    "SavingsGoal": {
+      "title": "SavingsGoal",
+      "description": "Celengan Impian untuk menabung.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID unik celengan."
+        },
+        "userId": {
+          "type": "string",
+          "description": "ID pemilik celengan."
+        },
+        "title": {
+          "type": "string",
+          "description": "Judul atau Target Celengan."
+        },
+        "targetAmount": {
+          "type": "number",
+          "description": "Target nominal yang ingin ditabung."
+        },
+        "currentAmount": {
+          "type": "number",
+          "description": "Nominal saat ini yang sudah terkumpul."
+        },
+        "category": {
+          "type": "string",
+          "enum": ["Gadget", "Liburan/Mudik", "Dana Darurat", "Fashion/Sepatu", "Lainnya"],
+          "description": "Kategori impian tabungan."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Tanggal celengan dibuat."
+        },
+        "targetMonths": {
+          "type": "number",
+          "description": "Target waktu menabung dalam bulan."
+        }
+      },
+      "required": ["id", "userId", "title", "targetAmount", "currentAmount", "category", "createdAt", "targetMonths"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Dokumen profil anak kos berdasarkan UID masing-masing."
+    },
+    "expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "Tabel pengeluaran per individu."
+    },
+    "goals/{goalId}": {
+      "schema": "SavingsGoal",
+      "description": "Daftar Celengan Impian milik masing-masing individu."
+    }
+  }
+}
